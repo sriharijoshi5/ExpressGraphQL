@@ -8,7 +8,14 @@ app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }) )
 // GET, PUT, POST, DELETE
 
-app.get("/products/:id", (req, res) => {
+function mid(req, res, next){
+    console.log(req.query);
+    console.log(req.params);
+    next();
+}
+
+
+app.get("/products/:id", mid, (req, res) => {
     // res.send("Hello World");
     res.json(Products.find((product) => {
         return +req.params.id === product.id
